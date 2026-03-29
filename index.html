@@ -939,7 +939,97 @@
     document.getElementById('results').innerHTML = html;
   }
 
+  // ── localStorage ────────────────────────────────────────────
+  const SAVE_KEYS = [
+    'petrolPrice','dieselPrice','petrol95Price',
+    'petrolCity','petrolHwy','dieselCity','dieselHwy',
+    'petrolGrade','rucClass','annualKm','cityMix'
+  ];
+
+  function saveSession() {
+    const data = { unit: activeUnit, scenario: activeScenario };
+    SAVE_KEYS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) data[id] = el.value;
+    });
+    localStorage.setItem('nzfuel_session', JSON.stringify(data));
+  }
+
+  function restoreSession() {
+    try {
+      const raw = localStorage.getItem('nzfuel_session');
+      if (!raw) return false;
+      const data = JSON.parse(raw);
+
+      // Restore unit first (before setting values, so they're in the right unit)
+      if (data.unit && data.unit !== activeUnit) {
+        activeUnit = data.unit;
+        document.getElementById('btnL100').classList.toggle('active', activeUnit === 'L100');
+        document.getElementById('btnKmL').classList.toggle('active', activeUnit === 'kmL');
+        const lbl = activeUnit === 'L100' ? '(L/100km)' : '(km/L)';
+        ['unitLabelPC','unitLabelPH','unitLabelDC','unitLabelDH'].forEach(id => {
+          document.getElementById(id).textContent = lbl;
+        });
+      }
+
+      SAVE_KEYS.forEach(id => {
+        if (data[id] === undefined) return;
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.value = data[id];
+      });
+
+      // Restore slider display
+      const sliderVal = parseInt(document.getElementById('cityMix').value);
+      const sl = document.getElementById('cityMix');
+      sl.style.setProperty('--city-pct', sliderVal + '%');
+      document.getElementById('cityPct').textContent = sliderVal + '%';
+      document.getElementById('hwyPct').textContent = (100 - sliderVal) + '%';
+
+      // Restore scenario tab
+      if (data.scenario) {
+        activeScenario = data.scenario;
+        const map = { city: 'active-city', hwy: 'active-hwy', mix: 'active-mix' };
+        document.querySelectorAll('.tab-btn').forEach((b, i) => {
+          const scenarios = ['city','hwy','mix'];
+          b.className = 'tab-btn' + (scenarios[i] === activeScenario ? ' ' + map[activeScenario] : '');
+        });
+      }
+
+      return true;
+    } catch(e) { return false; }
+  }
+
+  // Hook save into every input change
+  document.querySelectorAll('input, select').forEach(el => {
+    el.addEventListener('input', saveSession);
+    el.addEventListener('change', saveSession);
+  });
+
+  // Restore on load, then calculate
+  restoreSession();
   calculate();
+
+  // Saved indicator
+  (function showSavedToast() {
+    const had = localStorage.getItem('nzfuel_session');
+    if (!had) return;
+    const toast = document.createElement('div');
+    toast.textContent = '✓ Sessão anterior restaurada';
+    toast.style.cssText = `
+      position:fixed; bottom:1.5rem; left:50%; transform:translateX(-50%);
+      background:#1a1a22; border:1px solid #00e5a0; color:#00e5a0;
+      font-family:'Space Mono',monospace; font-size:0.72rem;
+      padding:0.5rem 1.1rem; border-radius:99px;
+      opacity:0; transition:opacity 0.3s; z-index:999; white-space:nowrap;
+    `;
+    document.body.appendChild(toast);
+    requestAnimationFrame(() => { toast.style.opacity = '1'; });
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      setTimeout(() => toast.remove(), 400);
+    }, 2500);
+  })();
 </script>
 </body>
 </html>
