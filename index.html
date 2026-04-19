@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
@@ -19,559 +20,560 @@
     --danger: #ff4d6d;
   }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Syne', sans-serif;
-    min-height: 100vh;
-    padding: 2rem 1rem 4rem;
-    background-image:
-      radial-gradient(ellipse at 20% 0%, rgba(0,229,160,0.06) 0%, transparent 50%),
-      radial-gradient(ellipse at 80% 100%, rgba(245,166,35,0.06) 0%, transparent 50%);
-  }
-
-  header {
-    text-align: center;
-    margin-bottom: 2.5rem;
-  }
-
-  .header-label {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.25em;
-    color: var(--muted);
-    text-transform: uppercase;
-    margin-bottom: 0.5rem;
-  }
-
-  h1 {
-    font-size: clamp(1.8rem, 5vw, 3rem);
-    font-weight: 800;
-    letter-spacing: -0.02em;
-    line-height: 1;
-  }
-
-  h1 span.g { color: var(--petrol); }
-  h1 span.d { color: var(--diesel); }
-
-  .subtitle {
-    margin-top: 0.6rem;
-    color: var(--muted);
-    font-size: 0.85rem;
-    font-family: 'Space Mono', monospace;
-  }
-
-  .alert-banner {
-    max-width: 860px;
-    margin: 0 auto 2rem;
-    background: rgba(255,77,109,0.08);
-    border: 1px solid rgba(255,77,109,0.3);
-    border-radius: 8px;
-    padding: 0.75rem 1.2rem;
-    font-size: 0.78rem;
-    font-family: 'Space Mono', monospace;
-    color: #ff8fa3;
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-  }
-
-  .alert-banner::before { content: '⚠'; font-size: 1rem; }
-
-  .grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-    max-width: 860px;
-    margin: 0 auto 1.5rem;
-  }
-
-  @media (max-width: 600px) {
-    .grid { grid-template-columns: 1fr; }
-  }
-
-  .card {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 1.4rem;
-  }
-
-  .card-title {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 1rem;
-  }
-
-  .field { margin-bottom: 1rem; }
-
-  label {
-    display: block;
-    font-size: 0.8rem;
-    color: var(--muted);
-    margin-bottom: 0.35rem;
-    font-family: 'Space Mono', monospace;
-  }
-
-  input[type="number"], select {
-    width: 100%;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    color: var(--text);
-    font-family: 'Space Mono', monospace;
-    font-size: 1rem;
-    padding: 0.6rem 0.9rem;
-    transition: border-color 0.2s;
-    appearance: none;
-  }
-
-  input[type="number"]:focus, select:focus {
-    outline: none;
-    border-color: var(--petrol);
-  }
-
-  .price-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.8rem;
-  }
-
-  .price-input-group { position: relative; }
-  .price-input-group .cur {
-    position: absolute;
-    left: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--muted);
-    font-family: 'Space Mono', monospace;
-    font-size: 0.85rem;
-    pointer-events: none;
-  }
-  .price-input-group input { padding-left: 1.8rem; }
-
-  .fuel-badge {
-    display: inline-block;
-    padding: 0.2rem 0.6rem;
-    border-radius: 4px;
-    font-size: 0.7rem;
-    font-family: 'Space Mono', monospace;
-    font-weight: 700;
-    margin-left: 0.4rem;
-  }
-  .petrol-badge { background: rgba(0,229,160,0.15); color: var(--petrol); }
-  .diesel-badge { background: rgba(245,166,35,0.15); color: var(--diesel); }
-
-  /* Full-width inputs card */
-  .full-card {
-    max-width: 860px;
-    margin: 0 auto 1.5rem;
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 1.4rem;
-  }
-
-  .full-card .price-row { grid-template-columns: 1fr 1fr 1fr; }
-  @media(max-width:600px) { .full-card .price-row { grid-template-columns: 1fr 1fr; } }
-
-  /* Results */
-  .results {
-    max-width: 860px;
-    margin: 0 auto;
-  }
-
-  .results-header {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1rem;
-  }
-
-  .results-header h2 {
-    font-size: 1rem;
-    font-weight: 800;
-    letter-spacing: -0.01em;
-  }
-
-  .divider {
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-  }
-
-  .results-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-  }
-
-  @media(max-width:600px) { .results-grid { grid-template-columns: 1fr; } }
-
-  .result-card {
-    border-radius: 12px;
-    padding: 1.2rem;
-    border: 1px solid var(--border);
-  }
-
-  .result-card.petrol-card {
-    background: linear-gradient(135deg, rgba(0,229,160,0.08) 0%, rgba(0,229,160,0.02) 100%);
-    border-color: rgba(0,229,160,0.25);
-  }
-
-  .result-card.diesel-card {
-    background: linear-gradient(135deg, rgba(245,166,35,0.08) 0%, rgba(245,166,35,0.02) 100%);
-    border-color: rgba(245,166,35,0.25);
-  }
-
-  .result-fuel-label {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    margin-bottom: 0.8rem;
-  }
-
-  .result-fuel-label.p { color: var(--petrol); }
-  .result-fuel-label.d { color: var(--diesel); }
-
-  .cost-big {
-    font-size: 2.2rem;
-    font-weight: 800;
-    letter-spacing: -0.03em;
-    line-height: 1;
-    margin-bottom: 0.3rem;
-  }
-
-  .cost-big.p { color: var(--petrol); }
-  .cost-big.d { color: var(--diesel); }
-
-  .cost-period {
-    font-size: 0.72rem;
-    font-family: 'Space Mono', monospace;
-    color: var(--muted);
-    margin-bottom: 1rem;
-  }
-
-  .breakdown {
-    border-top: 1px solid var(--border);
-    padding-top: 0.8rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-  }
-
-  .brow {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 0.78rem;
-    font-family: 'Space Mono', monospace;
-  }
-
-  .brow-label { color: var(--muted); }
-  .brow-value { color: var(--text); }
-
-  /* Winner Banner */
-  .winner-banner {
-    max-width: 860px;
-    margin: 0 auto 1.5rem;
-    border-radius: 12px;
-    padding: 1.2rem 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    transition: all 0.4s;
-  }
-
-  .winner-banner.petrol-win {
-    background: rgba(0,229,160,0.1);
-    border: 1px solid rgba(0,229,160,0.35);
-  }
-
-  .winner-banner.diesel-win {
-    background: rgba(245,166,35,0.1);
-    border: 1px solid rgba(245,166,35,0.35);
-  }
-
-  .winner-banner.tie {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid var(--border);
-  }
-
-  .winner-emoji { font-size: 1.8rem; }
-
-  .winner-text h3 {
-    font-size: 1rem;
-    font-weight: 800;
-    margin-bottom: 0.1rem;
-  }
-
-  .winner-text p {
-    font-size: 0.78rem;
-    font-family: 'Space Mono', monospace;
-    color: var(--muted);
-  }
-
-  .winner-text h3.p { color: var(--petrol); }
-  .winner-text h3.d { color: var(--diesel); }
-
-  /* CPK bar */
-  .cpk-section {
-    max-width: 860px;
-    margin: 0 auto 1.5rem;
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 1.2rem 1.4rem;
-  }
-
-  .cpk-label {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 1rem;
-  }
-
-  .bar-row {
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-  }
-
-  .bar-item { display: flex; flex-direction: column; gap: 0.3rem; }
-
-  .bar-meta {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.76rem;
-    font-family: 'Space Mono', monospace;
-  }
-
-  .bar-track {
-    height: 10px;
-    background: var(--surface);
-    border-radius: 99px;
-    overflow: hidden;
-  }
-
-  .bar-fill {
-    height: 100%;
-    border-radius: 99px;
-    transition: width 0.5s cubic-bezier(.4,0,.2,1);
-  }
-
-  .bar-fill.p { background: var(--petrol); }
-  .bar-fill.d { background: var(--diesel); }
-
-  /* Notes */
-  .note {
-    max-width: 860px;
-    margin: 0 auto;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.68rem;
-    color: var(--muted);
-    line-height: 1.6;
-    text-align: center;
-  }
-
-  .note a { color: var(--petrol); text-decoration: none; }
-
-  /* Tooltip */
-  [data-tip] { position: relative; cursor: help; border-bottom: 1px dotted var(--muted); }
-  [data-tip]:hover::after {
-    content: attr(data-tip);
-    position: absolute;
-    bottom: 125%;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #2a2a35;
-    color: var(--text);
-    padding: 0.4rem 0.7rem;
-    border-radius: 6px;
-    font-size: 0.7rem;
-    white-space: nowrap;
-    z-index: 10;
-    pointer-events: none;
-  }
-
-  /* Consumption sub-grid */
-  .consump-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.6rem;
-    margin-bottom: 0.6rem;
-  }
-
-  .consump-tag {
-    font-size: 0.62rem;
-    font-family: 'Space Mono', monospace;
-    padding: 0.1rem 0.4rem;
-    border-radius: 3px;
-    margin-left: 0.3rem;
-    vertical-align: middle;
-  }
-  .tag-city { background: rgba(120,180,255,0.15); color: #78b4ff; }
-  .tag-hwy  { background: rgba(160,230,130,0.15); color: #a0e682; }
-
-  .mix-row { margin-bottom: 1rem; }
-
-  .mix-slider-wrap {
-    position: relative;
-    margin-top: 0.5rem;
-  }
-
-  input[type="range"] {
-    -webkit-appearance: none;
-    width: 100%;
-    height: 6px;
-    border-radius: 99px;
-    background: linear-gradient(to right, #78b4ff var(--city-pct), #a0e682 var(--city-pct));
-    outline: none;
-    cursor: pointer;
-    --city-pct: 50%;
-  }
-
-  input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    background: var(--text);
-    border: 2px solid var(--bg);
-    box-shadow: 0 0 0 2px var(--border);
-    cursor: grab;
-  }
-
-  .mix-labels {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.68rem;
-    font-family: 'Space Mono', monospace;
-    margin-top: 0.35rem;
-  }
-
-  .mix-city { color: #78b4ff; }
-  .mix-hwy  { color: #a0e682; }
-
-  .effective-badge {
-    display: inline-block;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 0.25rem 0.6rem;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.72rem;
-    color: var(--muted);
-    margin-top: 0.4rem;
-  }
-
-  /* Scenario tabs */
-  .scenario-tabs {
-    display: flex;
-    gap: 0.5rem;
-    max-width: 860px;
-    margin: 0 auto 1.2rem;
-  }
-
-  .tab-btn {
-    flex: 1;
-    padding: 0.55rem 0.5rem;
-    border-radius: 8px;
-    border: 1px solid var(--border);
-    background: var(--surface);
-    color: var(--muted);
-    font-family: 'Space Mono', monospace;
-    font-size: 0.7rem;
-    cursor: pointer;
-    transition: all 0.2s;
-    text-align: center;
-  }
-
-  .tab-btn:hover { border-color: var(--text); color: var(--text); }
-
-  .tab-btn.active-city {
-    background: rgba(120,180,255,0.12);
-    border-color: #78b4ff;
-    color: #78b4ff;
-  }
-
-  .tab-btn.active-hwy {
-    background: rgba(160,230,130,0.12);
-    border-color: #a0e682;
-    color: #a0e682;
-  }
-
-  .tab-btn.active-mix {
-    background: rgba(255,255,255,0.06);
-    border-color: var(--text);
-    color: var(--text);
-  }
-
-  /* Scenario badge in winner */
-  .scenario-badge {
-    font-size: 0.65rem;
-    font-family: 'Space Mono', monospace;
-    padding: 0.15rem 0.5rem;
-    border-radius: 4px;
-    margin-left: 0.5rem;
-    vertical-align: middle;
-  }
-
-  .tag-city { background: rgba(120,180,255,0.15); color: #78b4ff; }
-  .tag-hwy  { background: rgba(160,230,130,0.15); color: #a0e682; }
-  .tag-mix  { background: rgba(255,255,255,0.08); color: var(--text); }
-
-  /* Unit toggle */
-  .unit-toggle {
-    display: inline-flex;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    overflow: hidden;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.72rem;
-  }
-
-  .unit-toggle button {
-    padding: 0.35rem 0.8rem;
-    border: none;
-    background: transparent;
-    color: var(--muted);
-    cursor: pointer;
-    transition: all 0.18s;
-    white-space: nowrap;
-  }
-
-  .unit-toggle button.active {
-    background: var(--petrol);
-    color: #000;
-    font-weight: 700;
-  }
-
-  .unit-toggle button:not(.active):hover {
-    color: var(--text);
-  }
-
-  .full-card-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 1rem;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-
-  .full-card-header .card-title { margin-bottom: 0; }
+- { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+background: var(–bg);
+color: var(–text);
+font-family: ‘Syne’, sans-serif;
+min-height: 100vh;
+padding: 2rem 1rem 4rem;
+background-image:
+radial-gradient(ellipse at 20% 0%, rgba(0,229,160,0.06) 0%, transparent 50%),
+radial-gradient(ellipse at 80% 100%, rgba(245,166,35,0.06) 0%, transparent 50%);
+}
+
+header {
+text-align: center;
+margin-bottom: 2.5rem;
+}
+
+.header-label {
+font-family: ‘Space Mono’, monospace;
+font-size: 0.7rem;
+letter-spacing: 0.25em;
+color: var(–muted);
+text-transform: uppercase;
+margin-bottom: 0.5rem;
+}
+
+h1 {
+font-size: clamp(1.8rem, 5vw, 3rem);
+font-weight: 800;
+letter-spacing: -0.02em;
+line-height: 1;
+}
+
+h1 span.g { color: var(–petrol); }
+h1 span.d { color: var(–diesel); }
+
+.subtitle {
+margin-top: 0.6rem;
+color: var(–muted);
+font-size: 0.85rem;
+font-family: ‘Space Mono’, monospace;
+}
+
+.alert-banner {
+max-width: 860px;
+margin: 0 auto 2rem;
+background: rgba(255,77,109,0.08);
+border: 1px solid rgba(255,77,109,0.3);
+border-radius: 8px;
+padding: 0.75rem 1.2rem;
+font-size: 0.78rem;
+font-family: ‘Space Mono’, monospace;
+color: #ff8fa3;
+display: flex;
+align-items: center;
+gap: 0.6rem;
+}
+
+.alert-banner::before { content: ‘⚠’; font-size: 1rem; }
+
+.grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 1.5rem;
+max-width: 860px;
+margin: 0 auto 1.5rem;
+}
+
+@media (max-width: 600px) {
+.grid { grid-template-columns: 1fr; }
+}
+
+.card {
+background: var(–panel);
+border: 1px solid var(–border);
+border-radius: 12px;
+padding: 1.4rem;
+}
+
+.card-title {
+font-family: ‘Space Mono’, monospace;
+font-size: 0.65rem;
+letter-spacing: 0.2em;
+text-transform: uppercase;
+color: var(–muted);
+margin-bottom: 1rem;
+}
+
+.field { margin-bottom: 1rem; }
+
+label {
+display: block;
+font-size: 0.8rem;
+color: var(–muted);
+margin-bottom: 0.35rem;
+font-family: ‘Space Mono’, monospace;
+}
+
+input[type=“number”], select {
+width: 100%;
+background: var(–surface);
+border: 1px solid var(–border);
+border-radius: 8px;
+color: var(–text);
+font-family: ‘Space Mono’, monospace;
+font-size: 1rem;
+padding: 0.6rem 0.9rem;
+transition: border-color 0.2s;
+appearance: none;
+}
+
+input[type=“number”]:focus, select:focus {
+outline: none;
+border-color: var(–petrol);
+}
+
+.price-row {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 0.8rem;
+}
+
+.price-input-group { position: relative; }
+.price-input-group .cur {
+position: absolute;
+left: 10px;
+top: 50%;
+transform: translateY(-50%);
+color: var(–muted);
+font-family: ‘Space Mono’, monospace;
+font-size: 0.85rem;
+pointer-events: none;
+}
+.price-input-group input { padding-left: 1.8rem; }
+
+.fuel-badge {
+display: inline-block;
+padding: 0.2rem 0.6rem;
+border-radius: 4px;
+font-size: 0.7rem;
+font-family: ‘Space Mono’, monospace;
+font-weight: 700;
+margin-left: 0.4rem;
+}
+.petrol-badge { background: rgba(0,229,160,0.15); color: var(–petrol); }
+.diesel-badge { background: rgba(245,166,35,0.15); color: var(–diesel); }
+
+/* Full-width inputs card */
+.full-card {
+max-width: 860px;
+margin: 0 auto 1.5rem;
+background: var(–panel);
+border: 1px solid var(–border);
+border-radius: 12px;
+padding: 1.4rem;
+}
+
+.full-card .price-row { grid-template-columns: 1fr 1fr 1fr; }
+@media(max-width:600px) { .full-card .price-row { grid-template-columns: 1fr 1fr; } }
+
+/* Results */
+.results {
+max-width: 860px;
+margin: 0 auto;
+}
+
+.results-header {
+display: flex;
+align-items: center;
+gap: 1rem;
+margin-bottom: 1rem;
+}
+
+.results-header h2 {
+font-size: 1rem;
+font-weight: 800;
+letter-spacing: -0.01em;
+}
+
+.divider {
+flex: 1;
+height: 1px;
+background: var(–border);
+}
+
+.results-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 1rem;
+margin-bottom: 1.5rem;
+}
+
+@media(max-width:600px) { .results-grid { grid-template-columns: 1fr; } }
+
+.result-card {
+border-radius: 12px;
+padding: 1.2rem;
+border: 1px solid var(–border);
+}
+
+.result-card.petrol-card {
+background: linear-gradient(135deg, rgba(0,229,160,0.08) 0%, rgba(0,229,160,0.02) 100%);
+border-color: rgba(0,229,160,0.25);
+}
+
+.result-card.diesel-card {
+background: linear-gradient(135deg, rgba(245,166,35,0.08) 0%, rgba(245,166,35,0.02) 100%);
+border-color: rgba(245,166,35,0.25);
+}
+
+.result-fuel-label {
+font-family: ‘Space Mono’, monospace;
+font-size: 0.65rem;
+letter-spacing: 0.2em;
+text-transform: uppercase;
+margin-bottom: 0.8rem;
+}
+
+.result-fuel-label.p { color: var(–petrol); }
+.result-fuel-label.d { color: var(–diesel); }
+
+.cost-big {
+font-size: 2.2rem;
+font-weight: 800;
+letter-spacing: -0.03em;
+line-height: 1;
+margin-bottom: 0.3rem;
+}
+
+.cost-big.p { color: var(–petrol); }
+.cost-big.d { color: var(–diesel); }
+
+.cost-period {
+font-size: 0.72rem;
+font-family: ‘Space Mono’, monospace;
+color: var(–muted);
+margin-bottom: 1rem;
+}
+
+.breakdown {
+border-top: 1px solid var(–border);
+padding-top: 0.8rem;
+display: flex;
+flex-direction: column;
+gap: 0.4rem;
+}
+
+.brow {
+display: flex;
+justify-content: space-between;
+align-items: center;
+font-size: 0.78rem;
+font-family: ‘Space Mono’, monospace;
+}
+
+.brow-label { color: var(–muted); }
+.brow-value { color: var(–text); }
+
+/* Winner Banner */
+.winner-banner {
+max-width: 860px;
+margin: 0 auto 1.5rem;
+border-radius: 12px;
+padding: 1.2rem 1.5rem;
+display: flex;
+align-items: center;
+gap: 1rem;
+transition: all 0.4s;
+}
+
+.winner-banner.petrol-win {
+background: rgba(0,229,160,0.1);
+border: 1px solid rgba(0,229,160,0.35);
+}
+
+.winner-banner.diesel-win {
+background: rgba(245,166,35,0.1);
+border: 1px solid rgba(245,166,35,0.35);
+}
+
+.winner-banner.tie {
+background: rgba(255,255,255,0.05);
+border: 1px solid var(–border);
+}
+
+.winner-emoji { font-size: 1.8rem; }
+
+.winner-text h3 {
+font-size: 1rem;
+font-weight: 800;
+margin-bottom: 0.1rem;
+}
+
+.winner-text p {
+font-size: 0.78rem;
+font-family: ‘Space Mono’, monospace;
+color: var(–muted);
+}
+
+.winner-text h3.p { color: var(–petrol); }
+.winner-text h3.d { color: var(–diesel); }
+
+/* CPK bar */
+.cpk-section {
+max-width: 860px;
+margin: 0 auto 1.5rem;
+background: var(–panel);
+border: 1px solid var(–border);
+border-radius: 12px;
+padding: 1.2rem 1.4rem;
+}
+
+.cpk-label {
+font-family: ‘Space Mono’, monospace;
+font-size: 0.65rem;
+letter-spacing: 0.2em;
+text-transform: uppercase;
+color: var(–muted);
+margin-bottom: 1rem;
+}
+
+.bar-row {
+display: flex;
+flex-direction: column;
+gap: 0.8rem;
+}
+
+.bar-item { display: flex; flex-direction: column; gap: 0.3rem; }
+
+.bar-meta {
+display: flex;
+justify-content: space-between;
+font-size: 0.76rem;
+font-family: ‘Space Mono’, monospace;
+}
+
+.bar-track {
+height: 10px;
+background: var(–surface);
+border-radius: 99px;
+overflow: hidden;
+}
+
+.bar-fill {
+height: 100%;
+border-radius: 99px;
+transition: width 0.5s cubic-bezier(.4,0,.2,1);
+}
+
+.bar-fill.p { background: var(–petrol); }
+.bar-fill.d { background: var(–diesel); }
+
+/* Notes */
+.note {
+max-width: 860px;
+margin: 0 auto;
+font-family: ‘Space Mono’, monospace;
+font-size: 0.68rem;
+color: var(–muted);
+line-height: 1.6;
+text-align: center;
+}
+
+.note a { color: var(–petrol); text-decoration: none; }
+
+/* Tooltip */
+[data-tip] { position: relative; cursor: help; border-bottom: 1px dotted var(–muted); }
+[data-tip]:hover::after {
+content: attr(data-tip);
+position: absolute;
+bottom: 125%;
+left: 50%;
+transform: translateX(-50%);
+background: #2a2a35;
+color: var(–text);
+padding: 0.4rem 0.7rem;
+border-radius: 6px;
+font-size: 0.7rem;
+white-space: nowrap;
+z-index: 10;
+pointer-events: none;
+}
+
+/* Consumption sub-grid */
+.consump-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 0.6rem;
+margin-bottom: 0.6rem;
+}
+
+.consump-tag {
+font-size: 0.62rem;
+font-family: ‘Space Mono’, monospace;
+padding: 0.1rem 0.4rem;
+border-radius: 3px;
+margin-left: 0.3rem;
+vertical-align: middle;
+}
+.tag-city { background: rgba(120,180,255,0.15); color: #78b4ff; }
+.tag-hwy  { background: rgba(160,230,130,0.15); color: #a0e682; }
+
+.mix-row { margin-bottom: 1rem; }
+
+.mix-slider-wrap {
+position: relative;
+margin-top: 0.5rem;
+}
+
+input[type=“range”] {
+-webkit-appearance: none;
+width: 100%;
+height: 6px;
+border-radius: 99px;
+background: linear-gradient(to right, #78b4ff var(–city-pct), #a0e682 var(–city-pct));
+outline: none;
+cursor: pointer;
+–city-pct: 50%;
+}
+
+input[type=“range”]::-webkit-slider-thumb {
+-webkit-appearance: none;
+width: 18px;
+height: 18px;
+border-radius: 50%;
+background: var(–text);
+border: 2px solid var(–bg);
+box-shadow: 0 0 0 2px var(–border);
+cursor: grab;
+}
+
+.mix-labels {
+display: flex;
+justify-content: space-between;
+font-size: 0.68rem;
+font-family: ‘Space Mono’, monospace;
+margin-top: 0.35rem;
+}
+
+.mix-city { color: #78b4ff; }
+.mix-hwy  { color: #a0e682; }
+
+.effective-badge {
+display: inline-block;
+background: var(–surface);
+border: 1px solid var(–border);
+border-radius: 6px;
+padding: 0.25rem 0.6rem;
+font-family: ‘Space Mono’, monospace;
+font-size: 0.72rem;
+color: var(–muted);
+margin-top: 0.4rem;
+}
+
+/* Scenario tabs */
+.scenario-tabs {
+display: flex;
+gap: 0.5rem;
+max-width: 860px;
+margin: 0 auto 1.2rem;
+}
+
+.tab-btn {
+flex: 1;
+padding: 0.55rem 0.5rem;
+border-radius: 8px;
+border: 1px solid var(–border);
+background: var(–surface);
+color: var(–muted);
+font-family: ‘Space Mono’, monospace;
+font-size: 0.7rem;
+cursor: pointer;
+transition: all 0.2s;
+text-align: center;
+}
+
+.tab-btn:hover { border-color: var(–text); color: var(–text); }
+
+.tab-btn.active-city {
+background: rgba(120,180,255,0.12);
+border-color: #78b4ff;
+color: #78b4ff;
+}
+
+.tab-btn.active-hwy {
+background: rgba(160,230,130,0.12);
+border-color: #a0e682;
+color: #a0e682;
+}
+
+.tab-btn.active-mix {
+background: rgba(255,255,255,0.06);
+border-color: var(–text);
+color: var(–text);
+}
+
+/* Scenario badge in winner */
+.scenario-badge {
+font-size: 0.65rem;
+font-family: ‘Space Mono’, monospace;
+padding: 0.15rem 0.5rem;
+border-radius: 4px;
+margin-left: 0.5rem;
+vertical-align: middle;
+}
+
+.tag-city { background: rgba(120,180,255,0.15); color: #78b4ff; }
+.tag-hwy  { background: rgba(160,230,130,0.15); color: #a0e682; }
+.tag-mix  { background: rgba(255,255,255,0.08); color: var(–text); }
+
+/* Unit toggle */
+.unit-toggle {
+display: inline-flex;
+background: var(–surface);
+border: 1px solid var(–border);
+border-radius: 8px;
+overflow: hidden;
+font-family: ‘Space Mono’, monospace;
+font-size: 0.72rem;
+}
+
+.unit-toggle button {
+padding: 0.35rem 0.8rem;
+border: none;
+background: transparent;
+color: var(–muted);
+cursor: pointer;
+transition: all 0.18s;
+white-space: nowrap;
+}
+
+.unit-toggle button.active {
+background: var(–petrol);
+color: #000;
+font-weight: 700;
+}
+
+.unit-toggle button:not(.active):hover {
+color: var(–text);
+}
+
+.full-card-header {
+display: flex;
+align-items: center;
+justify-content: space-between;
+margin-bottom: 1rem;
+flex-wrap: wrap;
+gap: 0.5rem;
+}
+
+.full-card-header .card-title { margin-bottom: 0; }
 </style>
+
 </head>
 <body>
 
@@ -586,6 +588,7 @@
 </div>
 
 <!-- Inputs Section -->
+
 <div class="full-card">
   <div class="full-card-header">
     <div class="card-title">Preços actuais do combustível (NZ$/litro)</div>
@@ -617,6 +620,10 @@
       </div>
     </div>
   </div>
+  <div class="field" style="margin-top:0.6rem; margin-bottom:0;">
+    <label>📍 Kms anuais <span style="color:var(--muted);font-size:0.7rem;">(ambos os veículos)</span></label>
+    <input type="number" id="annualKm" value="15000" step="500" min="1000" max="100000">
+  </div>
 </div>
 
 <div class="grid">
@@ -631,20 +638,17 @@
       <label>Consumo estrada <span class="consump-tag tag-hwy">🛣 ESTRADA</span> <span id="unitLabelPH" style="color:var(--muted);font-family:'Space Mono',monospace;font-size:0.7rem;">(L/100km)</span></label>
       <input type="number" id="petrolHwy" value="7.5" step="0.1" min="1" max="50">
     </div>
-    <div class="field">
+    <div class="field" style="margin-bottom:0;">
       <label>Grau de petrol</label>
       <select id="petrolGrade">
         <option value="91">91 Unlead (padrão)</option>
         <option value="95">95 Premium</option>
       </select>
     </div>
-    <div class="field">
-      <label>Kms anuais</label>
-      <input type="number" id="annualKmPetrol" value="15000" step="500" min="1000" max="100000">
-    </div>
   </div>
 
   <!-- Diesel Card -->
+
   <div class="card">
     <div class="card-title">Veículo Diesel <span class="fuel-badge diesel-badge">DIESEL</span></div>
     <div class="field">
@@ -655,7 +659,7 @@
       <label>Consumo estrada <span class="consump-tag tag-hwy">🛣 ESTRADA</span> <span id="unitLabelDH" style="color:var(--muted);font-family:'Space Mono',monospace;font-size:0.7rem;">(L/100km)</span></label>
       <input type="number" id="dieselHwy" value="6.0" step="0.1" min="1" max="50">
     </div>
-    <div class="field">
+    <div class="field" style="margin-bottom:0;">
       <label>RUC weight class</label>
       <select id="rucClass">
         <option value="76">Light (até 3,500kg) — $76/1000km</option>
@@ -664,14 +668,11 @@
         <option value="228">Extra-pesado (9,001+kg) — $228/1000km</option>
       </select>
     </div>
-    <div class="field">
-      <label>Kms anuais</label>
-      <input type="number" id="annualKm" value="15000" step="500" min="1000" max="100000">
-    </div>
   </div>
 </div>
 
 <!-- Mix slider -->
+
 <div class="full-card" style="margin-bottom:1.5rem;">
   <div class="card-title">Perfil de condução — mix cidade / estrada</div>
   <div class="mix-row">
@@ -690,6 +691,7 @@
 </div>
 
 <!-- Scenario tabs -->
+
 <div class="scenario-tabs">
   <button class="tab-btn active-city" onclick="setScenario('city')">🏙 Só Cidade</button>
   <button class="tab-btn" onclick="setScenario('hwy')">🛣 Só Estrada</button>
@@ -697,6 +699,7 @@
 </div>
 
 <!-- Results -->
+
 <div id="results" class="results"></div>
 
 <p class="note">
@@ -1031,5 +1034,6 @@
     }, 2500);
   })();
 </script>
+
 </body>
 </html>
